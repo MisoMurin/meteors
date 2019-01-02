@@ -1,0 +1,35 @@
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+		<variable
+			name="clickListener"
+			type="android.view.View.OnClickListener"/>
+		<variable
+			name="meteor"
+			type="com.murin.meteors.data.Meteor"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:onClick="@{clickListener}">
+
+		<TextView
+			android:id="@+id/tv_meteor_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/margin_small"
+			android:layout_marginEnd="@dimen/margin_small"
+			android:layout_marginStart="@dimen/margin_small"
+			android:layout_marginTop="@dimen/margin_small"
+			android:text="@{meteor.name}"
+			android:textAppearance="?attr/textAppearanceListItem"
+			android:textColor="@android:color/black"
+			tools:text="Meteor"/>
+
+	</LinearLayout>
+
+</layout>
