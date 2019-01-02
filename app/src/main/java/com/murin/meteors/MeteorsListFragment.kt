@@ -21,8 +21,9 @@ class MeteorsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMeteorsListBinding.inflate(inflater, container, false)
+        val context = context ?: return binding.root
 
-        val factory = Provider.provideMeteorsListViewModelFactory()
+        val factory = Provider.provideMeteorsListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(MeteorsListViewModel::class.java)
 
         val adapter = MeteorsAdapter()
