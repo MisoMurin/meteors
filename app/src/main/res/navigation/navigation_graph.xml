@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	app:startDestination="@+id/meteors_fragment">
+
+	<fragment
+		android:id="@+id/meteors_fragment"
+		android:name="com.murin.meteors.MeteorsListFragment"
+		android:label="@string/meteors_title"
+		tools:layout="@layout/fragment_meteors_list">
+	</fragment>
+
+</navigation>

@@ -1,3 +1,5 @@
 <resources>
-	<string name="app_name">Meteors</string>
+	<string name="meteors_title">Meteors</string>
+	<string name="meteor_map_title">Meteor Landing Location</string>
+
 </resources>
