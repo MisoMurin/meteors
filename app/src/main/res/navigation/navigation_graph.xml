@@ -4,13 +4,30 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	app:startDestination="@+id/meteors_fragment">
+	app:startDestination="@id/meteors_fragment">
 
 	<fragment
 		android:id="@+id/meteors_fragment"
 		android:name="com.murin.meteors.MeteorsListFragment"
 		android:label="@string/meteors_title"
 		tools:layout="@layout/fragment_meteors_list">
+
+		<action
+			android:id="@+id/action_meteors_fragment_to_meteor_landing_map_fragment"
+			app:destination="@+id/meteor_landing_map_fragment"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right"/>
+	</fragment>
+	<fragment
+		android:id="@+id/meteor_landing_map_fragment"
+		android:name="com.murin.meteors.MeteorLandingMapFragment"
+		android:label="MeteorLandingMapFragment">
+		<argument
+			android:name="meteorId"
+			app:argType="string"
+			android:defaultValue='""'/>
 	</fragment>
 
 </navigation>
