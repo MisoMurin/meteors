@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.murin.meteors.databinding.ActivityMeteorsBinding
 
 class MeteorsActivity : AppCompatActivity() {
@@ -19,11 +21,14 @@ class MeteorsActivity : AppCompatActivity() {
             R.layout.activity_meteors
         )
 
-        setSupportActionBar(binding.toolbar)
-
         navController = Navigation.findNavController(this, R.id.meteors_nav_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph, null)
 
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

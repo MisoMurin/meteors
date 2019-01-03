@@ -3,8 +3,10 @@ package com.murin.meteors.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.murin.meteors.MeteorsListFragmentDirections
 import com.murin.meteors.data.Meteor
 import com.murin.meteors.databinding.ItemMeteorBinding
 
@@ -27,7 +29,11 @@ class MeteorsAdapter : ListAdapter<Meteor, MeteorsAdapter.ViewHolder>(MeteorDiff
     }
 
     private fun createOnClickListener(meteorId: String): View.OnClickListener {
-        return View.OnClickListener {}
+        return View.OnClickListener {
+            val direction = MeteorsListFragmentDirections
+                .ActionMeteorsFragmentToMeteorLandingMapFragment().setMeteorId(meteorId)
+            it.findNavController().navigate(direction)
+        }
     }
 
     class ViewHolder(
