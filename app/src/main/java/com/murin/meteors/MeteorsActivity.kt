@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.mapbox.mapboxsdk.Mapbox
 import com.murin.meteors.databinding.ActivityMeteorsBinding
 
 class MeteorsActivity : AppCompatActivity() {
@@ -20,6 +21,8 @@ class MeteorsActivity : AppCompatActivity() {
             this,
             R.layout.activity_meteors
         )
+
+        Mapbox.getInstance(this, mapboxToken)
 
         navController = Navigation.findNavController(this, R.id.meteors_nav_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph, null)
