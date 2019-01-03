@@ -1,8 +1,26 @@
 package com.murin.meteors.data
 
+import com.murin.meteors.network.RetrofitFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 class MeteorsRepository private constructor(private val meteorDao: MeteorDao) {
 
-    fun getMeteors() = meteorDao.getMeteors()
+    fun getDbLiveMeteors() = meteorDao.getMeteors()
+
+    fun fetchMeteorsFromApi() = GlobalScope.launch(Dispatchers.IO) {
+        val meteors = RetrofitFactory
+            .createRetrofitService()
+            .getMeteorLandings()
+            .await()
+            .filter { it.year?.substring(0, 4)?.toInt() ?: 0 >= 2011}
+            .sortedBy { it.mass?.toFloat() }
+
+        if (meteors.isNotEmpty()) {
+            meteorDao.insertAll(meteors)
+        }
+    }
 
     companion object {
         @Volatile private var instance: MeteorsRepository? = null

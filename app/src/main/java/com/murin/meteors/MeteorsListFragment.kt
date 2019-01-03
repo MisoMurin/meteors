@@ -36,8 +36,12 @@ class MeteorsListFragment : Fragment() {
 
     private fun subscribeUi(adapter: MeteorsAdapter) {
         viewModel.getMeteors().observe(viewLifecycleOwner, Observer { meteors ->
-            if (meteors != null) {
-                adapter.submitList(meteors)
+            meteors?.size?.run {
+                if (this > 0) {
+                    adapter.submitList(meteors)
+                } else {
+                    viewModel.fetchMeteors()
+                }
             }
         })
     }
