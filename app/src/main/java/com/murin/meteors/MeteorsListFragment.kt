@@ -21,8 +21,9 @@ class MeteorsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMeteorsListBinding.inflate(inflater, container, false)
+        val context = context ?: return binding.root
 
-        val factory = Provider.provideMeteorsListViewModelFactory()
+        val factory = Provider.provideMeteorsListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(MeteorsListViewModel::class.java)
 
         val adapter = MeteorsAdapter()
@@ -35,8 +36,12 @@ class MeteorsListFragment : Fragment() {
 
     private fun subscribeUi(adapter: MeteorsAdapter) {
         viewModel.getMeteors().observe(viewLifecycleOwner, Observer { meteors ->
-            if (meteors != null) {
-                adapter.submitList(meteors)
+            meteors?.size?.run {
+                if (this > 0) {
+                    adapter.submitList(meteors)
+                } else {
+                    viewModel.fetchMeteors()
+                }
             }
         })
     }
