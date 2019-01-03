@@ -7,6 +7,8 @@ import kotlinx.coroutines.launch
 
 class MeteorsRepository private constructor(private val meteorDao: MeteorDao) {
 
+    fun getMeteorById(meteorId: String) = meteorDao.getMeteorById(meteorId)
+
     fun getDbLiveMeteors() = meteorDao.getMeteors()
 
     fun fetchMeteorsFromApi() = GlobalScope.launch(Dispatchers.IO) {
