@@ -1,4 +1,4 @@
-package com.murin.meteors.network
+package com.murin.meteors.data.network
 
 import com.murin.meteors.data.Meteor
 import com.murin.meteors.xAppToken

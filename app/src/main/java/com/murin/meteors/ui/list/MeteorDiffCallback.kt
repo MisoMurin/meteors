@@ -1,4 +1,4 @@
-package com.murin.meteors.adapters
+package com.murin.meteors.ui.list
 
 import androidx.recyclerview.widget.DiffUtil
 import com.murin.meteors.data.Meteor

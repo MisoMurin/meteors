@@ -1,10 +1,10 @@
 package com.murin.meteors
 
 import android.content.Context
-import com.murin.meteors.data.AppDatabase
+import com.murin.meteors.data.db.AppDatabase
 import com.murin.meteors.data.MeteorsRepository
-import com.murin.meteors.viewmodel.MeteorLandingMapViewModelFactory
-import com.murin.meteors.viewmodel.MeteorsListViewModelFactory
+import com.murin.meteors.ui.map.MeteorLandingMapViewModelFactory
+import com.murin.meteors.ui.list.MeteorsListViewModelFactory
 
 object Provider {
     private fun getMeteorsRepository(context: Context): MeteorsRepository {

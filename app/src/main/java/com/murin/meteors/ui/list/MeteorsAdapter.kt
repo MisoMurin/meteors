@@ -1,4 +1,4 @@
-package com.murin.meteors.adapters
+package com.murin.meteors.ui.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.murin.meteors.MeteorsListFragmentDirections
 import com.murin.meteors.data.Meteor
 import com.murin.meteors.databinding.ItemMeteorBinding
 

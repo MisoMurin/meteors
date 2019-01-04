@@ -1,4 +1,4 @@
-package com.murin.meteors.viewmodel
+package com.murin.meteors.ui.map
 
 import androidx.lifecycle.ViewModel
 import com.murin.meteors.data.MeteorsRepository

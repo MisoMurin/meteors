@@ -1,6 +1,7 @@
 package com.murin.meteors.data
 
-import com.murin.meteors.network.RetrofitFactory
+import com.murin.meteors.data.db.MeteorDao
+import com.murin.meteors.data.network.RetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

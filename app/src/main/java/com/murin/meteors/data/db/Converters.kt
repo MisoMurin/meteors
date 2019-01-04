@@ -1,4 +1,4 @@
-package com.murin.meteors.data
+package com.murin.meteors.data.db
 
 import androidx.room.TypeConverter
 

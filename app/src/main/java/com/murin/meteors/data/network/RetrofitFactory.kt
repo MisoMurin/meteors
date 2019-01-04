@@ -1,4 +1,4 @@
-package com.murin.meteors.network
+package com.murin.meteors.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

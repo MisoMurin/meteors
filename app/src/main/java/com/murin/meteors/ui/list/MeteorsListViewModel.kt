@@ -1,4 +1,4 @@
-package com.murin.meteors.viewmodel
+package com.murin.meteors.ui.list
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel

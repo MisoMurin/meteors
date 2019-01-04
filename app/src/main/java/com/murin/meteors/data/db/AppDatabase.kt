@@ -1,10 +1,11 @@
-package com.murin.meteors.data
+package com.murin.meteors.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.murin.meteors.data.Meteor
 
 const val DATABASE_NAME = "meteors-db"
 
@@ -18,7 +19,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+                instance
+                    ?: buildDatabase(context).also { instance = it }
             }
         }
 

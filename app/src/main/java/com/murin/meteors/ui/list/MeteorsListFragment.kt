@@ -1,4 +1,4 @@
-package com.murin.meteors
+package com.murin.meteors.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.murin.meteors.adapters.MeteorsAdapter
+import com.murin.meteors.Provider
 import com.murin.meteors.databinding.FragmentMeteorsListBinding
-import com.murin.meteors.viewmodel.MeteorsListViewModel
 
 class MeteorsListFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.murin.meteors
+package com.murin.meteors.ui.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdate
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.murin.meteors.Provider
 import com.murin.meteors.databinding.FragmentMeteorLandingMapBinding
-import com.murin.meteors.viewmodel.MeteorLandingMapViewModel
 
 class MeteorLandingMapFragment: Fragment() {
     private lateinit var viewModel: MeteorLandingMapViewModel
