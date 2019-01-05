@@ -7,19 +7,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import com.murin.meteors.Provider
+import com.murin.meteors.R
+import com.murin.meteors.data.MeteorsRepository
 import com.murin.meteors.databinding.FragmentMeteorsListBinding
+import com.murin.meteors.isOnline
 
 class MeteorsListFragment : Fragment() {
 
     private lateinit var viewModel: MeteorsListViewModel
+    private lateinit var binding: FragmentMeteorsListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMeteorsListBinding.inflate(inflater, container, false)
+        binding = FragmentMeteorsListBinding.inflate(inflater, container, false)
         val context = context ?: return binding.root
 
         val factory = Provider.provideMeteorsListViewModelFactory(context)
@@ -34,14 +39,30 @@ class MeteorsListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: MeteorsAdapter) {
-        viewModel.getMeteors().observe(viewLifecycleOwner, Observer { meteors ->
+        viewModel.meteors.observe(viewLifecycleOwner, Observer { meteors ->
             meteors?.size?.run {
                 if (this > 0) {
                     adapter.submitList(meteors)
                 } else {
-                    viewModel.fetchMeteors()
+                    activity?.run {
+                        if (this.isOnline()) {
+                            snackbar(R.string.fetching)
+                            viewModel.fetchMeteors()
+                        } else {
+                            snackbar(R.string.offline)
+                        }
+                    } ?: throw IllegalStateException("Fragment with invalid activity.")
                 }
             }
         })
+
+        viewModel.fetchStatus.observe(viewLifecycleOwner, Observer { status ->
+            if (status == MeteorsRepository.FetchStatus.FAILURE) {
+                snackbar(R.string.fetch_error)
+            }
+        })
     }
+
+    private fun snackbar(messageId: Int) =
+        Snackbar.make(binding.rvMeteorsList, messageId, Snackbar.LENGTH_LONG).show()
 }

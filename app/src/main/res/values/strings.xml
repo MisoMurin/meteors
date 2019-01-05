@@ -1,5 +1,8 @@
 <resources>
 	<string name="meteors_title">Meteors</string>
 	<string name="meteor_map_title">Meteor Landing Map</string>
+	<string name="fetch_error">Fetching the meteors has failed.</string>
+	<string name="fetching">Fetching meteors from API.</string>
+	<string name="offline">App is offline - can\'t fetch.</string>
 
 </resources>
