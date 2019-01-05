@@ -7,7 +7,7 @@ import com.murin.meteors.ui.map.MeteorLandingMapViewModelFactory
 import com.murin.meteors.ui.list.MeteorsListViewModelFactory
 
 object Provider {
-    private fun getMeteorsRepository(context: Context): MeteorsRepository {
+    fun getMeteorsRepository(context: Context): MeteorsRepository {
         return MeteorsRepository.getInstance(AppDatabase.getInstance(context).meteorDao())
     }
 

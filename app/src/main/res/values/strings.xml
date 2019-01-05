@@ -4,5 +4,6 @@
 	<string name="fetch_error">Fetching the meteors has failed.</string>
 	<string name="fetching">Fetching meteors from API.</string>
 	<string name="offline">App is offline - can\'t fetch.</string>
+	<string name="unknown_state">Unknown state</string>
 
 </resources>

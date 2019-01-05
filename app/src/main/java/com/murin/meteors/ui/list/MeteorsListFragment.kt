@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.murin.meteors.Provider
 import com.murin.meteors.R
-import com.murin.meteors.data.MeteorsRepository
+import com.murin.meteors.data.MeteorsRepository.FetchStatus.*
 import com.murin.meteors.databinding.FragmentMeteorsListBinding
-import com.murin.meteors.isOnline
 
 class MeteorsListFragment : Fragment() {
 
@@ -43,22 +42,16 @@ class MeteorsListFragment : Fragment() {
             meteors?.size?.run {
                 if (this > 0) {
                     adapter.submitList(meteors)
-                } else {
-                    activity?.run {
-                        if (this.isOnline()) {
-                            snackbar(R.string.fetching)
-                            viewModel.fetchMeteors()
-                        } else {
-                            snackbar(R.string.offline)
-                        }
-                    } ?: throw IllegalStateException("Fragment with invalid activity.")
                 }
             }
         })
 
         viewModel.fetchStatus.observe(viewLifecycleOwner, Observer { status ->
-            if (status == MeteorsRepository.FetchStatus.FAILURE) {
-                snackbar(R.string.fetch_error)
+            when (status) {
+                SUCCESS -> {}
+                FAILURE -> snackbar(R.string.fetch_error)
+                FETCHING -> snackbar(R.string.fetching)
+                else -> snackbar(R.string.unknown_state)
             }
         })
     }

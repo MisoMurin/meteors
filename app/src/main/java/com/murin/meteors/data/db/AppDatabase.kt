@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.murin.meteors.data.Meteor
+import com.murin.meteors.data.sync.SyncDatabaseCallback
 
 const val DATABASE_NAME = "meteors-db"
 
@@ -25,7 +26,9 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+                .addCallback(SyncDatabaseCallback())
+                .build()
         }
     }
 }

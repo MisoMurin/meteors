@@ -3,34 +3,34 @@ package com.murin.meteors.data
 import androidx.lifecycle.MutableLiveData
 import com.murin.meteors.data.db.MeteorDao
 import com.murin.meteors.data.network.RetrofitFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MeteorsRepository private constructor(private val meteorDao: MeteorDao) {
+    val fetchStatus = MutableLiveData<FetchStatus>()
 
     fun getMeteorById(meteorId: String) = meteorDao.getMeteorById(meteorId)
 
     fun getDbLiveMeteors() = meteorDao.getMeteors()
 
-    fun fetchMeteorsFromApi(fetchStatus: MutableLiveData<FetchStatus>?) =
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val meteors = RetrofitFactory
-                    .createRetrofitService()
-                    .getMeteorLandings()
-                    .await()
-                    .filter { it.year?.substring(0, 4)?.toInt() ?: 0 >= 2011 }
-                    .sortedBy { it.mass?.toFloat() }
-
-                if (meteors.isNotEmpty()) {
-                    meteorDao.insertAll(meteors)
+    fun fetchMeteorsFromApi() =
+        try {
+            println("mmeteors: fetching")
+            fetchStatus.postValue(FetchStatus.FETCHING)
+            RetrofitFactory.createRetrofitService().getMeteorLandings().execute()
+                .run {
+                    if (isSuccessful) {
+                        meteorDao.insertAll(body() ?: emptyList())
+                        fetchStatus.postValue(FetchStatus.SUCCESS)
+                        true
+                    } else {
+                        fetchStatus.postValue(FetchStatus.FAILURE)
+                        false
+                    }
                 }
-                fetchStatus?.postValue(FetchStatus.SUCCESS)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                fetchStatus?.postValue(FetchStatus.FAILURE)
-            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            fetchStatus.postValue(FetchStatus.FAILURE)
+            false
         }
 
     companion object {
