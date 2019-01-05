@@ -9,4 +9,9 @@
 	<string name="cd_meteor_icon">meteor icon</string>
 	<string name="no_landing_location">The meteor\'s landing location is unknown.</string>
 
+	<plurals name="meteors_count">
+		<item quantity="one">Showing 1 meteor.</item>
+		<item quantity="other">Showing %1$d meteors.</item>
+	</plurals>
+
 </resources>

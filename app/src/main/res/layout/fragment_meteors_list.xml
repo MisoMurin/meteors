@@ -4,14 +4,33 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/rv_meteors_list"
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:clipToPadding="false"
-		android:paddingLeft="@dimen/margin_small"
-		android:paddingRight="@dimen/margin_small"
-		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:context="com.murin.meteors.MeteorsActivity"
-		tools:listitem="@layout/item_meteor" />
+		android:orientation="vertical"
+		android:animateLayoutChanges="true">
+
+		<TextView
+			android:id="@+id/tv_meteors_count"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="@dimen/margin_medium"
+			android:visibility="gone"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?android:attr/listDivider"/>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/rv_meteors_list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingLeft="@dimen/margin_small"
+			android:paddingRight="@dimen/margin_small"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			tools:context="com.murin.meteors.MeteorsActivity"
+			tools:listitem="@layout/item_meteor" />
+	</LinearLayout>
 </layout>

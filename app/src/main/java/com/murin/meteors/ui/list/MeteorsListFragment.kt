@@ -42,11 +42,18 @@ class MeteorsListFragment : Fragment() {
 
     private fun subscribeUi(adapter: MeteorsAdapter) {
         viewModel.meteors.observe(viewLifecycleOwner, Observer { meteors ->
-            meteors?.size?.run {
-                if (this > 0) {
-                    adapter.submitList(meteors)
-                }
+            val meteorsCount = meteors?.size ?: 0
+            if (meteorsCount > 0) {
+                adapter.submitList(meteors)
             }
+            binding.tvMeteorsCount.text = String.format(
+                resources.getQuantityString(
+                    R.plurals.meteors_count,
+                    meteors?.size ?: 0
+                ),
+                meteorsCount
+            )
+            binding.tvMeteorsCount.visibility = View.VISIBLE
         })
 
         viewModel.fetchStatus.observe(viewLifecycleOwner, Observer { status ->
