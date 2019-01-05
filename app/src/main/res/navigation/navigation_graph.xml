@@ -23,7 +23,7 @@
 	<fragment
 		android:id="@+id/meteor_landing_map_fragment"
 		android:name="com.murin.meteors.ui.map.MeteorLandingMapFragment"
-		android:label="MeteorLandingMapFragment">
+		android:label="@string/meteor_map_title">
 		<argument
 			android:name="meteorId"
 			app:argType="integer"
