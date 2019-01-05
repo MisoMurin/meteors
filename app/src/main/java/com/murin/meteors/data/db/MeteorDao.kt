@@ -9,7 +9,7 @@ import com.murin.meteors.data.Meteor
 
 @Dao
 interface MeteorDao {
-    @Query("SELECT * FROM meteors")
+    @Query("SELECT * FROM meteors ORDER BY mass DESC")
     fun getMeteors(): LiveData<List<Meteor>>
 
     @Query("SELECT * FROM meteors WHERE id = :meteorId")
