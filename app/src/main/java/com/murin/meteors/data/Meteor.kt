@@ -37,4 +37,8 @@ data class Meteor(
     fun massKgString() = "${(mass?.toFloat() ?: 0f) / 1000f} kg"
 
     fun yearAsNumber() = year?.substring(0, 4) ?: 0
+
+    fun hasLandingLocation() = geolocation?.let {
+        it.coordinates[0] != 0.0f && it.coordinates[1] != 0.0f
+    } ?: false
 }

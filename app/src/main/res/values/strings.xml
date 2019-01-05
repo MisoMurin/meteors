@@ -7,5 +7,6 @@
 	<string name="unknown_state">Unknown state</string>
 
 	<string name="cd_meteor_icon">meteor icon</string>
+	<string name="no_landing_location">The meteor\'s landing location is unknown.</string>
 
 </resources>

@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.murin.meteors.R
 import com.murin.meteors.data.Meteor
 import com.murin.meteors.databinding.ItemMeteorBinding
 
@@ -14,7 +16,7 @@ class MeteorsAdapter : ListAdapter<Meteor, MeteorsAdapter.ViewHolder>(MeteorDiff
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val meteor = getItem(position)
         holder.apply {
-            bind(createOnClickListener(meteor.id), meteor)
+            bind(createOnClickListener(meteor.id, position), meteor)
             itemView.tag = meteor
         }
     }
@@ -27,11 +29,15 @@ class MeteorsAdapter : ListAdapter<Meteor, MeteorsAdapter.ViewHolder>(MeteorDiff
         ))
     }
 
-    private fun createOnClickListener(meteorId: String): View.OnClickListener {
+    private fun createOnClickListener(meteorId: String, position: Int): View.OnClickListener {
         return View.OnClickListener {
-            val direction = MeteorsListFragmentDirections
-                .ActionMeteorsFragmentToMeteorLandingMapFragment().setMeteorId(meteorId)
-            it.findNavController().navigate(direction)
+            if (getItem(position).hasLandingLocation()) {
+                val direction = MeteorsListFragmentDirections
+                    .ActionMeteorsFragmentToMeteorLandingMapFragment().setMeteorId(meteorId)
+                it.findNavController().navigate(direction)
+            } else {
+                Snackbar.make(it, R.string.no_landing_location, Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
