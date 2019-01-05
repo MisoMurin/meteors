@@ -26,8 +26,8 @@
 		android:label="MeteorLandingMapFragment">
 		<argument
 			android:name="meteorId"
-			app:argType="string"
-			android:defaultValue='""'/>
+			app:argType="integer"
+			android:defaultValue="0"/>
 	</fragment>
 
 </navigation>

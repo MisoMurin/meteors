@@ -13,7 +13,7 @@ interface MeteorDao {
     fun getMeteors(): LiveData<List<Meteor>>
 
     @Query("SELECT * FROM meteors WHERE id = :meteorId")
-    fun getMeteorById(meteorId: String): LiveData<List<Meteor>>
+    fun getMeteorById(meteorId: Int): LiveData<List<Meteor>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(meteors: List<Meteor>)

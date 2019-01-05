@@ -36,7 +36,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
-			android:text='@{meteor.name + " (" + meteor.yearAsNumber() + ")"}'
+			android:text='@{meteor.name + " (" + meteor.year + ")"}'
 			android:textAppearance="?attr/textAppearanceListItem"
 			android:textColor="@android:color/black"
 			app:layout_constraintTop_toTopOf="parent"
@@ -49,10 +49,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="8dp"
-			android:text='@{meteor.massKgString()}'
+			android:text="@{meteor.massKg()}"
 			android:textAppearance="?attr/textAppearanceListItem"
 			android:textColor="@android:color/black"
-			android:visibility='@{(meteor.mass == null || meteor.mass == "") ? View.GONE : View.VISIBLE}'
+			android:visibility="@{(meteor.mass == 0) ? View.GONE : View.VISIBLE}"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintStart_toEndOf="@+id/iv_meteor_icon"
 			app:layout_constraintTop_toBottomOf="@id/tv_meteor_name_year"

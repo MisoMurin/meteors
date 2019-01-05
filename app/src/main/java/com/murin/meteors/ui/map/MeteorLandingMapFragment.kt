@@ -48,14 +48,14 @@ class MeteorLandingMapFragment: Fragment() {
     private fun subscribeUi() {
         viewModel.getMeteor().observe(viewLifecycleOwner, Observer { meteors ->
             meteors[0].let { meteor ->
-                val latLng = meteor.geolocation?.coordinates?.let {
-                    LatLng(it[1].toDouble(), it[0].toDouble())
-                } ?: LatLng(0.0, 0.0)
+                val latLng = meteor.geolocation.run {
+                    LatLng(lat.toDouble(), lng.toDouble())
+                }
 
                 val markerViewOptions = MarkerOptions()
                     .position(latLng)
-                    .title("${meteor.name} (${meteor.yearAsNumber()})")
-                    .snippet("Class: ${meteor.recClass}, Mass: ${meteor.massKgString()}")
+                    .title("${meteor.name} (${meteor.year})")
+                    .snippet("Class: ${meteor.recClass}, Mass: ${meteor.massKg()}")
 
                 mapboxMap.addMarker(markerViewOptions)
 

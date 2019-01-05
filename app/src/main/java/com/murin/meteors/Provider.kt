@@ -16,7 +16,7 @@ object Provider {
         return MeteorsListViewModelFactory(repository)
     }
 
-    fun provideMeteorLandingMapViewModelFactory(meteorId: String, context: Context): MeteorLandingMapViewModelFactory {
+    fun provideMeteorLandingMapViewModelFactory(meteorId: Int, context: Context): MeteorLandingMapViewModelFactory {
         val repository = getMeteorsRepository(context)
         return MeteorLandingMapViewModelFactory(meteorId, repository)
     }

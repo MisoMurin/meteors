@@ -7,7 +7,7 @@ import com.murin.meteors.data.network.RetrofitFactory
 class MeteorsRepository private constructor(private val meteorDao: MeteorDao) {
     val fetchStatus = MutableLiveData<FetchStatus>()
 
-    fun getMeteorById(meteorId: String) = meteorDao.getMeteorById(meteorId)
+    fun getMeteorById(meteorId: Int) = meteorDao.getMeteorById(meteorId)
 
     fun getDbLiveMeteors() = meteorDao.getMeteors()
 
@@ -15,10 +15,10 @@ class MeteorsRepository private constructor(private val meteorDao: MeteorDao) {
         try {
             println("mmeteors: fetching")
             fetchStatus.postValue(FetchStatus.FETCHING)
-            RetrofitFactory.createRetrofitService().getMeteorLandings().execute()
+            RetrofitFactory.meteorsApi.getMeteorLandings("year>='2011-01-01T00:00:00'", 1000, 0).execute()
                 .run {
                     if (isSuccessful) {
-                        meteorDao.insertAll(body() ?: emptyList())
+                        meteorDao.insertAll(body()?.map { it.toMeteor() } ?: emptyList())
                         fetchStatus.postValue(FetchStatus.SUCCESS)
                         true
                     } else {

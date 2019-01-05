@@ -4,41 +4,33 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.squareup.moshi.Json
 
 @Entity(tableName = "meteors")
 data class Meteor(
     @PrimaryKey @ColumnInfo(name = "id")
-    val id: String,
-    val name: String?,
-    @field:Json(name = "nametype")
+    val id: Int,
+    val name: String,
     @ColumnInfo(name = "nametype")
-    val nameType: String?,
-    val mass: String?,
-    @field:Json(name = "recclass")
+    val nameType: String,
+    val mass: Float,
     @ColumnInfo(name = "recclass")
-    val recClass: String?,
-    @field:Json(name = "reclat")
+    val recClass: String,
     @ColumnInfo(name = "reclat")
-    val recLat: String?,
-    @field:Json(name = "reclong")
+    val recLat: Float,
     @ColumnInfo(name = "reclong")
-    val recLng: String?,
-    val year: String?,
-    val fall: String?,
+    val recLng: Float,
+    val year: Int,
+    val fall: String,
     @Embedded
-    val geolocation: Geolocation?
+    val geolocation: Geolocation
 ) {
     data class Geolocation(
         val type: String,
-        val coordinates: List<Float>
+        val lat: Float,
+        val lng: Float
     )
 
-    fun massKgString() = "${(mass?.toFloat() ?: 0f) / 1000f} kg"
+    fun massKg() = "${mass / 1000f} kg"
 
-    fun yearAsNumber() = year?.substring(0, 4) ?: 0
-
-    fun hasLandingLocation() = geolocation?.let {
-        it.coordinates[0] != 0.0f && it.coordinates[1] != 0.0f
-    } ?: false
+    fun hasLandingLocation() = geolocation.run { lat != 0.0f && lng != 0.0f }
 }

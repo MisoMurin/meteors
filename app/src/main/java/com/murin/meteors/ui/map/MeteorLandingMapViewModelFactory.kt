@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.murin.meteors.data.MeteorsRepository
 
 class MeteorLandingMapViewModelFactory(
-    private val meteorId: String,
+    private val meteorId: Int,
     private val meteorsRepository: MeteorsRepository
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

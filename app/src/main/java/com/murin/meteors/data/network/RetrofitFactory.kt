@@ -17,12 +17,11 @@ object RetrofitFactory {
         .readTimeout(60, TimeUnit.SECONDS)
         .build()
 
-    fun createRetrofitService(): MeteorsApi {
-        return Retrofit.Builder()
+    val meteorsApi: MeteorsApi = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(MeteorsApi::class.java)
-    }
+
 }

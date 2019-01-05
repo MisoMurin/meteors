@@ -29,7 +29,7 @@ class MeteorsAdapter : ListAdapter<Meteor, MeteorsAdapter.ViewHolder>(MeteorDiff
         ))
     }
 
-    private fun createOnClickListener(meteorId: String, position: Int): View.OnClickListener {
+    private fun createOnClickListener(meteorId: Int, position: Int): View.OnClickListener {
         return View.OnClickListener {
             if (getItem(position).hasLandingLocation()) {
                 val direction = MeteorsListFragmentDirections
