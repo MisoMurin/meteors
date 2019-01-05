@@ -33,4 +33,8 @@ data class Meteor(
         val type: String,
         val coordinates: List<Float>
     )
+
+    fun massKgString() = "${(mass?.toFloat() ?: 0f) / 1000f} kg"
+
+    fun yearAsNumber() = year?.substring(0, 4) ?: 0
 }

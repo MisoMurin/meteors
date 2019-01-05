@@ -6,4 +6,6 @@
 	<string name="offline">App is offline - can\'t fetch.</string>
 	<string name="unknown_state">Unknown state</string>
 
+	<string name="cd_meteor_icon">meteor icon</string>
+
 </resources>

@@ -1,8 +1,11 @@
 <layout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools">
 
 	<data>
+		<import
+			type="android.view.View"/>
 		<variable
 			name="clickListener"
 			type="android.view.View.OnClickListener"/>
@@ -11,25 +14,50 @@
 			type="com.murin.meteors.data.Meteor"/>
 	</data>
 
-	<LinearLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:foreground="?attr/selectableItemBackground"
 		android:onClick="@{clickListener}">
 
-		<TextView
-			android:id="@+id/tv_meteor_name"
-			android:layout_width="match_parent"
+		<ImageView
+			android:id="@+id/iv_meteor_icon"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/margin_small"
-			android:layout_marginEnd="@dimen/margin_small"
-			android:layout_marginStart="@dimen/margin_small"
-			android:layout_marginTop="@dimen/margin_small"
-			android:text="@{meteor.name}"
+			android:contentDescription="@string/cd_meteor_icon"
+			android:src="@drawable/ic_meteor"
+			android:padding="@dimen/margin_medium"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"/>
+
+		<TextView
+			android:id="@+id/tv_meteor_name_year"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text='@{meteor.name + " (" + meteor.yearAsNumber() + ")"}'
 			android:textAppearance="?attr/textAppearanceListItem"
 			android:textColor="@android:color/black"
-			tools:text="Meteor"/>
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toTopOf="@id/tv_meteor_mass"
+			app:layout_constraintStart_toEndOf="@+id/iv_meteor_icon"
+			tools:text="Meteor (2014)"/>
 
-	</LinearLayout>
+		<TextView
+			android:id="@+id/tv_meteor_mass"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:text='@{meteor.massKgString()}'
+			android:textAppearance="?attr/textAppearanceListItem"
+			android:textColor="@android:color/black"
+			android:visibility='@{(meteor.mass == null || meteor.mass == "") ? View.GONE : View.VISIBLE}'
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/iv_meteor_icon"
+			app:layout_constraintTop_toBottomOf="@id/tv_meteor_name_year"
+			tools:text="Mass: mass in kg"/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

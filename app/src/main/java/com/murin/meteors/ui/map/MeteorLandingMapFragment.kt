@@ -54,8 +54,8 @@ class MeteorLandingMapFragment: Fragment() {
 
                 val markerViewOptions = MarkerOptions()
                     .position(latLng)
-                    .title(meteor.name)
-                    .snippet("Class: ${meteor.recClass}, Mass: ${meteor.mass}")
+                    .title("${meteor.name} (${meteor.yearAsNumber()})")
+                    .snippet("Class: ${meteor.recClass}, Mass: ${meteor.massKgString()}")
 
                 mapboxMap.addMarker(markerViewOptions)
 

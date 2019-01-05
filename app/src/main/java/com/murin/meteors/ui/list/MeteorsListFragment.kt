@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import com.google.android.material.snackbar.Snackbar
 import com.murin.meteors.Provider
 import com.murin.meteors.R
@@ -30,6 +32,7 @@ class MeteorsListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(MeteorsListViewModel::class.java)
 
         val adapter = MeteorsAdapter()
+        binding.rvMeteorsList.addItemDecoration(DividerItemDecoration(context, VERTICAL))
         binding.rvMeteorsList.adapter = adapter
         subscribeUi(adapter)
 
